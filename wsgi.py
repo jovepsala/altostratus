@@ -2,6 +2,7 @@ import time
 import datetime
 import socket
 from flask import Flask
+from flask import Response
 
 application = Flask(__name__)
 
@@ -19,7 +20,7 @@ def hello():
 
     file.close()
 
-    return content
+    return Response(content, mimetype="text/plain")
 
 if __name__ == "__main__":
     application.run()
