@@ -3,14 +3,17 @@ import datetime
 import socket
 from flask import Flask
 from flask import Response
+import os
 
 application = Flask(__name__)
 
 @application.route("/")
 def hello():
 
+    os.remove("/mnt/log.txt")
+
     timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
-    line = timestamp + "\t" + socket.gethostname() + "\n"
+    line = socket.gethostname() + "\t" + timestamp + "\n"
 
     file = open("/mnt/log.txt", "a+")
     file.write(line)
